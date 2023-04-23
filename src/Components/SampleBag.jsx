@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import ScannerComponent from "./ScannerComponent";
+import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
+// import ScannerComponent from "./ScannerComponent";
 // // import { v4 as uuidv4 } from "uuid"; // import uuid
 
 function SampleBag(props) {
@@ -9,6 +10,12 @@ function SampleBag(props) {
   const [bagBarcode, setBagBarcode] = useState(props.bagData.bagBarcode || "");
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
+  const [decodedResults, setDecodedResults] = useState([]);
+
+  const onNewScanResult = (decodedText, decodedResult) => {
+    console.log("App [result]", decodedResult);
+    setDecodedResults((prev) => [...prev, decodedResult]);
+  };
 
   const handleBagIdChange = (event) => {
     setBagId(event.target.value);
@@ -49,26 +56,16 @@ function SampleBag(props) {
           />
         </label>
         <div className="form-group">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => setShowScanner(!showScanner)}
-          >
-            Scan
-          </button>
-          {showScanner && (
-            <div>
-              {/* <div id={`reader-${index}`}></div> */}
-              <ScannerComponent
-                scannedDataFromScanner={(data) => {
-                  // setScannedData(data);
-                  setBagBarcode(data);
-                  setShowScanner(false);
-                }}
-                readerId={props.id}
-              />
-            </div>
-          )}
+          <div>
+            <Html5QrcodePlugin
+              key={props.id}
+              fps={100}
+              qrbox={250}
+              disableFlip={false}
+              qrCodeSuccessCallback={onNewScanResult}
+              readerId={props.id}
+            />
+          </div>
         </div>
       </div>
       <p>{scannedData}</p>

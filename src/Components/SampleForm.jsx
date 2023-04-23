@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/SampleFormStyle.css";
 
+import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
 import SampleBag from "./SampleBag";
 import TestComponent from "./TestComponent";
 import Button from "react-bootstrap/Button";
@@ -27,11 +28,13 @@ const SampleForm = () => {
 
   const handleSampleBagChange = (index, bagData) => {
     setSampleBags((prevSampleBags) => {
+      console.log("Helloo");
       const newSampleBags = [...prevSampleBags];
       newSampleBags[index] = bagData;
       return newSampleBags;
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(sampleBags);
@@ -52,7 +55,9 @@ const SampleForm = () => {
                 key={index}
                 id={index}
                 bagData={sampleBag}
-                onChange={(bagData) => handleSampleBagChange(index, bagData)}
+                onChange={(bagData) =>
+                  handleSampleBagChange.bind(index, bagData)
+                }
               />
             ))}
             <Button onClick={handleAddSampleBag}>Add Sample Bag</Button>

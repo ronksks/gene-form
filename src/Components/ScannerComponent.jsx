@@ -7,7 +7,7 @@ function ScannerComponent(props) {
   const handleQrCodeSuccess = (decodedText, decodedResult) => {
     setScannedDataInScanner(decodedText);
     props.scannedDataFromScanner(decodedText); // pass the scanned data back to the SampleBag component
-    Html5Qrcode.pause(); // stop scanning
+    Html5Qrcode.stop(); // stop scanning
   };
 
   Html5Qrcode.getCameras()
@@ -27,7 +27,7 @@ function ScannerComponent(props) {
 
         try {
           html5QrCode.start(
-            { facingMode: { exact: "environment" } },
+            { facingMode: { exact: "user" } },
             config,
             handleQrCodeSuccess
           );
@@ -47,6 +47,7 @@ function ScannerComponent(props) {
       alert(err);
       console.log("Error getting cameras", err);
     });
+
   return <div id={`reader-${props.readerId}`}></div>;
 }
 
