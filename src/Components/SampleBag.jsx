@@ -64,9 +64,8 @@ function SampleBag(props) {
                   // setScannedData(data);
                   setBagBarcode(data);
                   setShowScanner(false);
-                  
                 }}
-                readerId={props.key}
+                readerId={props.id}
               />
             </div>
           )}

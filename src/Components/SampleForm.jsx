@@ -50,6 +50,7 @@ const SampleForm = () => {
             {sampleBags.map((sampleBag, index) => (
               <SampleBag
                 key={index}
+                id={index}
                 bagData={sampleBag}
                 onChange={(bagData) => handleSampleBagChange(index, bagData)}
               />

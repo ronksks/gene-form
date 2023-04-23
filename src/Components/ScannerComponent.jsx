@@ -12,8 +12,9 @@ function ScannerComponent(props) {
 
   Html5Qrcode.getCameras()
     .then((devices) => {
+      const theReaderId = "reader-" + props.readerId;
       if (devices && devices.length) {
-        const html5QrCode = new Html5Qrcode("reader");
+        const html5QrCode = new Html5Qrcode(theReaderId);
         const config = {
           fps: 100,
           qrbox: {
@@ -43,7 +44,7 @@ function ScannerComponent(props) {
     .catch((err) => {
       console.log("Error getting cameras", err);
     });
-  return <div id={`reader-${props.index}`}></div>;
+  return <div id={`reader-${props.readerId}`}></div>;
 }
 
 export default ScannerComponent;
