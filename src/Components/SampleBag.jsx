@@ -3,26 +3,26 @@ import React, { useState } from "react";
 import ScannerComponent from "./ScannerComponent";
 // // import { v4 as uuidv4 } from "uuid"; // import uuid
 
-function SampleBag({ bagData, onChange }) {
-  const [bagId, setBagId] = useState(bagData.bagId || "");
-  const [bagWeight, setBagWeight] = useState(bagData.bagWeight || "");
-  const [bagBarcode, setBagBarcode] = useState(bagData.bagBarcode || "");
+function SampleBag(props) {
+  const [bagId, setBagId] = useState(props.bagData.bagId || "");
+  const [bagWeight, setBagWeight] = useState(props.bagData.bagWeight || "");
+  const [bagBarcode, setBagBarcode] = useState(props.bagData.bagBarcode || "");
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
 
   const handleBagIdChange = (event) => {
     setBagId(event.target.value);
-    onChange({ ...bagData, bagId: event.target.value });
+    props.onChange({ ...props.bagData, bagId: event.target.value });
   };
 
   const handleBagWeightChange = (event) => {
     setBagWeight(event.target.value);
-    onChange({ ...bagData, bagWeight: event.target.value });
+    props.onChange({ ...props.bagData, bagWeight: event.target.value });
   };
 
   const handleBagBarcodeChange = (event) => {
     setBagBarcode(event.target.value);
-    onChange({ ...bagData, bagBarcode: event.target.value });
+    props.onChange({ ...props.bagData, bagBarcode: event.target.value });
   };
 
   return (
@@ -64,8 +64,9 @@ function SampleBag({ bagData, onChange }) {
                   // setScannedData(data);
                   setBagBarcode(data);
                   setShowScanner(false);
+                  
                 }}
-                // readerId={`reader-${index}`}
+                readerId={props.key}
               />
             </div>
           )}
