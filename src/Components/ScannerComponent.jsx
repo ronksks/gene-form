@@ -13,6 +13,7 @@ function ScannerComponent(props) {
   Html5Qrcode.getCameras()
     .then((devices) => {
       const theReaderId = "reader-" + props.readerId;
+      console.log(theReaderId);
       if (devices && devices.length) {
         const html5QrCode = new Html5Qrcode(theReaderId);
         const config = {
@@ -37,11 +38,13 @@ function ScannerComponent(props) {
             });
           }, 2000);
         } catch (error) {
+          alert(error);
           console.log("Unable to start scanning.", error);
         }
       }
     })
     .catch((err) => {
+      alert(err);
       console.log("Error getting cameras", err);
     });
   return <div id={`reader-${props.readerId}`}></div>;
