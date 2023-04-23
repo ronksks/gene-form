@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/gene-form/static/css/main.cb06c756.css",
-    "main.js": "/gene-form/static/js/main.6c61811b.js",
+    "main.js": "/gene-form/static/js/main.c9625cb2.js",
     "index.html": "/gene-form/index.html",
     "main.cb06c756.css.map": "/gene-form/static/css/main.cb06c756.css.map",
-    "main.6c61811b.js.map": "/gene-form/static/js/main.6c61811b.js.map"
+    "main.c9625cb2.js.map": "/gene-form/static/js/main.c9625cb2.js.map"
   },
   "entrypoints": [
     "static/css/main.cb06c756.css",
-    "static/js/main.6c61811b.js"
+    "static/js/main.c9625cb2.js"
   ]
 }
