@@ -7,7 +7,7 @@ function ScannerComponent(props) {
   const handleQrCodeSuccess = (decodedText, decodedResult) => {
     setScannedDataInScanner(decodedText);
     props.scannedDataFromScanner(decodedText); // pass the scanned data back to the SampleBag component
-    Html5Qrcode.stop(); // stop scanning
+    Html5Qrcode.pause(); // stop scanning
   };
 
   Html5Qrcode.getCameras()
