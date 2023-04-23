@@ -13,7 +13,9 @@ function SampleBag(props) {
   const onNewScanResult = (decodedText, decodedResult) => {
     console.log("App [result]", decodedText);
     setDecodedResults((prev) => [...prev, decodedResult]);
-    handleBagBarcodeChange();
+    // handleBagBarcodeChange();
+    setBagBarcode(decodedText);
+    props.onChange({ ...props.bagData, bagBarcode: decodedText });
   };
 
   const handleBagIdChange = (event) => {
