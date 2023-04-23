@@ -1,29 +1,37 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/SampleFormStyle.css";
 
-import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
+// import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
 import SampleBag from "./SampleBag";
-import TestComponent from "./TestComponent";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button, Form } from "react-bootstrap";
 
 const SampleForm = () => {
   const [bagNumber, setBagNumber] = useState(1);
-  const [scannedData, SetScannedData] = useState("");
   const [sampleBags, setSampleBags] = useState([]);
+  const [totalWeight, setTotalWeight] = useState(0);
 
-  //   function getTotalSampleBagWeight(sampleBags) {
-  //     return sampleBags.reduce((totalWeight, bag) => {
-  //       return totalWeight + parseFloat(bag.weight || 0);
-  //     }, 0);
-  //   }
-  // const handleAddSampleBag = (newSampleBag) => {
-  //   setSampleBags([...sampleBags, newSampleBag]);
-  // };
+  function getTotalSampleBagWeight() {
+    return sampleBags.reduce((totalWeight, bag) => {
+      return totalWeight + parseFloat(bag.bagWeight || 0);
+    }, 0);
+  }
 
   const handleAddSampleBag = () => {
-    const newSampleBag = { bagId: "", bagWeight: "", bagBarcode: "" };
-    setSampleBags([...sampleBags, newSampleBag]);
+    const newSampleBag = { bagId: bagNumber, bagWeight: "", bagBarcode: "" };
+    setSampleBags((prevSampleBags) => [...prevSampleBags, newSampleBag]);
+    setBagNumber((prevBagNumber) => prevBagNumber + 1);
+    setTotalWeight(getTotalSampleBagWeight());
+  };
+
+  const handleRemoveSampleBag = (e) => {
+    const idToRemove = sampleBags.findIndex(
+      (sampleBag) => sampleBag.bagId === e.bagId
+    );
+    const updatedSampleBags = [...sampleBags];
+    updatedSampleBags.splice(idToRemove, 1);
+    setSampleBags(updatedSampleBags);
+    setBagNumber((prevBagNumber) => prevBagNumber - 1);
+    setTotalWeight(getTotalSampleBagWeight());
   };
 
   const handleSampleBagChange = (index, bagData) => {
@@ -33,6 +41,7 @@ const SampleForm = () => {
       newSampleBags[index] = bagData;
       return newSampleBags;
     });
+    setTotalWeight(getTotalSampleBagWeight());
   };
 
   const handleSubmit = (e) => {
@@ -56,6 +65,7 @@ const SampleForm = () => {
                 id={index}
                 bagData={sampleBag}
                 onChange={(bagData) => handleSampleBagChange(index, bagData)}
+                removeSampleBag={handleRemoveSampleBag}
               />
             ))}
             <Button onClick={handleAddSampleBag}>Add Sample Bag</Button>
@@ -70,9 +80,9 @@ const SampleForm = () => {
               type="text"
               id="totalWeight"
               name="totalWeight"
-              disabled
-              // readOnly
-              // value={getTotalSampleBagWeight(values.sampleBags)}
+              // disabled
+              readOnly
+              value={totalWeight}
             />
           </div>
 
