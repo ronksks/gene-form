@@ -13,10 +13,8 @@ function SampleBag(props) {
   const [decodedResults, setDecodedResults] = useState([]);
 
   const onNewScanResult = (decodedText, decodedResult) => {
-    console.log("App [result]", decodedResult);
     console.log("App [result]", decodedText);
     setDecodedResults((prev) => [...prev, decodedResult]);
-    alert(decodedText);
     handleBagBarcodeChange();
   };
 
@@ -62,7 +60,7 @@ function SampleBag(props) {
           <div>
             <Html5QrcodePlugin
               key={props.id}
-              fps={100}
+              fps={50}
               qrbox={250}
               disableFlip={false}
               qrCodeSuccessCallback={onNewScanResult}
