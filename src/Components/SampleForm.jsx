@@ -7,16 +7,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const SampleForm = () => {
-  // const getBarcodeData = (data) => {
-  //   return;
-  // };
   const [bagNumber, setBagNumber] = useState(1);
   const [scannedData, SetScannedData] = useState("");
   const [sampleBags, setSampleBags] = useState([]);
-
-  //   const handleBarcodeData = (data) => {
-  //     SetScannedData(data);
-  //   };
 
   //   function getTotalSampleBagWeight(sampleBags) {
   //     return sampleBags.reduce((totalWeight, bag) => {
@@ -26,11 +19,7 @@ const SampleForm = () => {
   // const handleAddSampleBag = (newSampleBag) => {
   //   setSampleBags([...sampleBags, newSampleBag]);
   // };
-  // function AddSampleBagButton({ onAdd }) {
-  //   const handleClick = () => {
-  //     const newSampleBag = { bagId: "", bagWeight: "", bagBarcode: "" };
-  //     onAdd(newSampleBag);
-  //   };
+
   const handleAddSampleBag = () => {
     const newSampleBag = { bagId: "", bagWeight: "", bagBarcode: "" };
     setSampleBags([...sampleBags, newSampleBag]);
@@ -43,12 +32,14 @@ const SampleForm = () => {
       return newSampleBags;
     });
   };
-
+  const handleSubmit = () => {
+    console.log(sampleBags);
+  };
   return (
     <div className="form-container">
       <h2>Sample Form</h2>
       <div className="form-group">
-        <Form className="form">
+        <Form onSubmit={handleSubmit} className="form">
           <div className="form-group">
             <label htmlFor="seedsWeight">Seeds weight (grams):</label>
             <input type="text" id="seedsWeight" name="seedsWeight" />
@@ -80,7 +71,11 @@ const SampleForm = () => {
             />
           </div>
 
-          <div className="form-group">{/* buttons submit */}</div>
+          <div className="form-group">
+            <Button type="submit" className="btn submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </div>
           <pre>{JSON.stringify(sampleBags, null, 2)}</pre>
         </Form>
       </div>
