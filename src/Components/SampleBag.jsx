@@ -14,7 +14,10 @@ function SampleBag(props) {
 
   const onNewScanResult = (decodedText, decodedResult) => {
     console.log("App [result]", decodedResult);
+    console.log("App [result]", decodedText);
     setDecodedResults((prev) => [...prev, decodedResult]);
+    alert(decodedText);
+    handleBagBarcodeChange();
   };
 
   const handleBagIdChange = (event) => {
