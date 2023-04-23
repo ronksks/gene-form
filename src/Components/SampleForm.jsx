@@ -28,7 +28,7 @@ const SampleForm = () => {
 
   const handleSampleBagChange = (index, bagData) => {
     setSampleBags((prevSampleBags) => {
-      console.log("Helloo");
+      // console.log("Helloo");
       const newSampleBags = [...prevSampleBags];
       newSampleBags[index] = bagData;
       return newSampleBags;
@@ -55,9 +55,7 @@ const SampleForm = () => {
                 key={index}
                 id={index}
                 bagData={sampleBag}
-                onChange={(bagData) =>
-                  handleSampleBagChange.bind(index, bagData)
-                }
+                onChange={(bagData) => handleSampleBagChange(index, bagData)}
               />
             ))}
             <Button onClick={handleAddSampleBag}>Add Sample Bag</Button>
