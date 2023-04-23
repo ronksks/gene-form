@@ -8,8 +8,6 @@ function SampleBag(props) {
   const [bagId, setBagId] = useState(props.bagData.bagId || "");
   const [bagWeight, setBagWeight] = useState(props.bagData.bagWeight || "");
   const [bagBarcode, setBagBarcode] = useState(props.bagData.bagBarcode || "");
-  const [scannedData, setScannedData] = useState("");
-  const [showScanner, setShowScanner] = useState(false);
   const [decodedResults, setDecodedResults] = useState([]);
 
   const onNewScanResult = (decodedText, decodedResult) => {
@@ -60,16 +58,16 @@ function SampleBag(props) {
           <div>
             <Html5QrcodePlugin
               key={props.id}
-              fps={50}
-              qrbox={250}
-              disableFlip={false}
+              fps={10}
+              qrbox={128}
+              disableFlip={true}
               qrCodeSuccessCallback={onNewScanResult}
               readerId={props.id}
             />
           </div>
         </div>
       </div>
-      <p>{scannedData}</p>
+      {/* <p>{bagBarcode}</p> */}
     </div>
   );
 }

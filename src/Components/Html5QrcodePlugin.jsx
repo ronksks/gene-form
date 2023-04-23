@@ -5,10 +5,14 @@ import { useEffect } from "react";
 const createConfig = (props) => {
   let config = {};
   if (props.fps) {
-    config.fps = props.fps;
+    config.fps = 100;
   }
   if (props.qrbox) {
     config.qrbox = props.qrbox;
+    // config.qrbox = {
+    //   width: window.screen.width < 600 ? 200 : 300,
+    //   height: window.screen.width < 600 ? 100 : 100,
+    // };
   }
   if (props.aspectRatio) {
     config.aspectRatio = props.aspectRatio;
