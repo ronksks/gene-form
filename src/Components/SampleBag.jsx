@@ -61,7 +61,8 @@ function SampleBag({ bagData, onChange }) {
               {/* <div id={`reader-${index}`}></div> */}
               <ScannerComponent
                 scannedDataFromScanner={(data) => {
-                  setScannedData(data);
+                  // setScannedData(data);
+                  setBagBarcode(data);
                   setShowScanner(false);
                 }}
                 // readerId={`reader-${index}`}
