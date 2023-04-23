@@ -32,7 +32,8 @@ const SampleForm = () => {
       return newSampleBags;
     });
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(sampleBags);
   };
   return (
