@@ -36,6 +36,10 @@ function SampleBag(props) {
     setScannerHidden(true);
   };
 
+  const handleRemoveSampleBag = () => {
+    props.removeSampleBag(props.bagData.bagId);
+  };
+
   return (
     <div className="sample-bag">
       <div className="form-group">
@@ -92,9 +96,7 @@ function SampleBag(props) {
         <Button
           type="button"
           className="btn remove"
-          onClick={() => {
-            props.removeSampleBag(bagId);
-          }}
+          onClick={handleRemoveSampleBag}
         >
           Remove
         </Button>
